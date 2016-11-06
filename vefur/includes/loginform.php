@@ -10,8 +10,8 @@ if ($error) {
  <input type="text" name="username" id="username">
  </p>
  <p>
- <label for="pwd">Password:</label>
- <input type="password" name="pwd" id="pwd">
+ <label for="password">Password:</label>
+ <input type="password" name="password" id="password">
  </p>
  <p>
  <input name="login" type="submit" value="Log in">
@@ -19,26 +19,20 @@ if ($error) {
 
     <h1> Signup </h1>
 
-            <p>
-                <label for="UserS">Username:</label>
-
-                <input name="UserS" id="UserS" type="text">
-            </p>
-
-            <p>
-                <label for="EmailS">Email:</label>
-
-                <input name="EmailS" id="EmailS" type="text">
-            </p>
-
-            <p>
-                 <label for="PassS">Password:</label>
-
-              <input name="passS" id="passS" type="text">
-            </p>
-
-            <p>
-             <input name="send" type="submit" value="Signup">
-             </p>
+<p>
+     <label for="userS">Username:</label>
+    <input name="userS" id="userS" type="text">
+</p>
+ <p>
+      <label for="emailS">Email:</label>
+     <input name="emailS" id="emailS" type="text">
+</p>
+  <p>
+     <label for="passS">Password:</label>
+     <input name="passS" id="passS" type="text">
+</p>
+<p>
+   <input name="register" type="submit" value="Signup">
+ </p>
 
 </form>

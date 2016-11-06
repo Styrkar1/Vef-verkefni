@@ -1,27 +1,69 @@
 <?php
 include './includes/title.php';
+require './includes/connection.php';
 ?> 
 
 <?php
+//THE LOGIN
+session_start();
 $error = '';
-if (isset($_POST['login'])) {
- session_start();
- $username = $_POST['username'];
- $password = $_POST['pwd'];
- // location of usernames and passwords
- $use ='admin';
- $pas ='12';
+if (isset($_POST['login']))
+{
 
- if ($username == $use and $password == $pas) {
+ $username = $_POST['username'];
+ $password = $_POST['password'];
+
+
+
+$sql = "SELECT userID FROM `users` WHERE `userName`  = '$username' and `userPassword` = '$password'";
+
+$result = mysqli_query($con,$sql);
+$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+if(mysqli_num_rows($result) == 1)
+{
  	$_SESSION['authenticated'] = 'imset';
  	$_SESSION['start'] = time();
  	header('Location: ./profile.php');
  	exit;
- }
- else {
- 	echo 'You failed';
- }
 }
+else
+{
+$error = "IT'S WRONG";
+}
+
+
+}
+
+//THE REGISTRATION
+
+if(isset($_POST['register']))
+{
+	$userS = $_POST["userS"];
+	$emailS = $_POST["emailS"];
+	$passS = $_POST["passS"];
+
+$sql = "SELECT userEmail FROM users WHERE userEmail ='$emailS'";
+$result = mysqli_query($con,$sql);
+$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+ 
+if(mysqli_num_rows($result) == 1)
+{
+ echo "That email exists already.";
+}
+
+else
+{
+$query = mysqli_query($con, "INSERT INTO users (name, email, password) VALUES ('$userS', '$emailS', '$passS')");
+ 
+if($query)
+{
+ echo "Thank You! you are now registered.";
+}
+
+}
+}
+// HOYL FUCK
 ?>
 
 <!DOCTYPE html>
@@ -49,9 +91,9 @@ if ($error) {
 			<main>
 				<div id = "content">
 
-<?php
-	require './includes/loginform.php';
-?>
+		<?php
+		require './includes/loginform.php';
+		?>
 
 
 				</div>
