@@ -54,11 +54,15 @@ if(mysqli_num_rows($result) == 1)
 
 else
 {
-$query = mysqli_query($con, "INSERT INTO users (name, email, password) VALUES ('$userS', '$emailS', '$passS')");
+$query = mysqli_query($con, "INSERT INTO users (`userName`, `userEmail`, `userPassword`, `accessLevel`, `activity`) VALUES ('$userS', '$emailS', '$passS',1,1)");
  
 if($query)
 {
- echo "Thank You! you are now registered.";
+ echo "You are now registered.";
+}
+else
+{
+	echo "ripperoni";
 }
 
 }
@@ -109,6 +113,8 @@ if ($error) {
 			</nav>
 		
 		</div>
+
+
 		
 					<footer id="footer">
 			<div class="innertube">

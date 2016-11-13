@@ -1,91 +1,94 @@
 <?php 
 
-class Book {
+class Book
+{
 
-var $Titill;
-var $Verd;
+private $Titill;
+private $Verd;
 
-
-
-function __construct($par1,$par2)
+public function __construct()
 	{
-		$this->Titill = $par1;
-		$this->Verd = $par2;
+		$this->Titill =  '';
+		$this->Verd = '';
 	}
 
-function setPrice($par)
+public function setPrice($Verd)
 	{
-		$this->Verd = $par;
+		$this->Verd = $Verd;
 	}
 
- function getPrice()
+public function getPrice()
 	{
-		echo $this->Verd.' <br/>';
+		return $this->Verd.' <br/>';
 	}
 
- function setTitle($par)
+public function setTitle($Titill)
 	{
-		$this->Titill = $par;
+		$this->Titill = $Titill;
 	}
 	
- function getTitle()
+public function getTitle()
 	{
-    	echo $this->Titill.' <br/>';
+    	return $this->Titill.' <br/>';
 	}
 }
-
 
 
 class Bokabok extends Book
 {
 
-var $Publisher;
+private $Publisher;
+
+public function __construct()
+	{
+		$this->Publisher = '';
+	}
+
+public function getPublisher()
+	{
+		return $this->Publisher. "<br />";
+	}
 
 
-function getPublisher()
-{
-	echo $this->Publisher. "<br />";
-}
-
-
- function setPublisher($par)
-{
-	$this->Publisher = $par;	
-}
-
-function __construct()
-{
-$Efnafraedi = new Book;
-$Sterfraedi = new Book;
-$Islenska = new Book;
-
-$Efnafraedi->setTitle("Efnafræði 101 ");
-$Efnafraedi->setPrice("2000 KR");
-$Efnafraedi->setPublisher("spooky dood");
-
-$Sterfraedi->setTitle("Stærðfræði 101 ");
-$Sterfraedi->setPrice("5000 KR");
-$Sterfraedi->setPublisher("math man");
-
-$Islenska->setTitle("Íslenka 101 ");
-$Islenska->setPrice("3000 KR");
-$Islenska->setPublisher("Íslenska 101");
-
-$Efnafraedi->getTitle();
-$Efnafraedi->getPrice();
-$Efnafraedi->getPublisher();
-
-$Sterfraedi->getTitle();
-$Sterfraedi->getPrice();
-$Sterfraedi->getPublisher();
-
-$Islenska->getTitle();
-$Islenska->getPrice();
-$Islenska->getPublisher();
-
-print $this->Efnafraedi."plsno";
-}
+public function setPublisher($Publisher)
+	{
+		$this->Publisher = $Publisher;	
+	}
 
 }
 
-  ?>
+$Efnafraedi = new Book();
+$Pefnafraedi = new Bokabok();
+$Efnafraedi->setTitle("How the world works");
+$Efnafraedi->setPrice("5,000");
+$Pefnafraedi->setPublisher("The man with the plan");
+
+$Sterfraedi = new Book();
+$Psterfraedi = new Bokabok();
+$Sterfraedi->setTitle("Math 101");
+$Sterfraedi->setPrice("10,000");
+$Psterfraedi->setPublisher("math man 3000");
+
+$Islenska = new Book();
+$Pislenska = new Bokabok();
+$Islenska->setTitle("icelandic for you");
+$Islenska->setPrice("3,000");
+$Pislenska->setPublisher("the lady man");
+
+
+echo $Efnafraedi->getTitle();
+echo $Efnafraedi->getPrice();
+echo $Pefnafraedi->getPublisher();
+
+echo "<br />";
+echo $Islenska->getTitle();
+echo $Islenska->getPrice();
+echo $Pislenska->getPublisher();
+
+echo "<br />";
+echo $Sterfraedi->getTitle();
+echo $Sterfraedi->getPrice();
+echo $Psterfraedi->getPublisher();
+
+
+?>

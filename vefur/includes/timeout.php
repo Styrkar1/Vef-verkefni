@@ -1,27 +1,28 @@
 <?php
 ob_start();
-// set a time limit in seconds
 $timelimit = 15 * 60;
-// get the current time
+// what time is it? (gets the time)
 $now = time();
-// where to redirect if rejected
 $redirect = './logins.php';
-// if session variable not set, redirect to login page
+// makes it so that if there is no session it'll redirect
 if (!isset($_SESSION['authenticated'])) {
  header("Location: ./Gallery.php");
  exit;
 } elseif ($now > $_SESSION['start'] + $timelimit) {
- // if timelimit has expired, destroy session and redirect
+ // if the time limit is over it destroyes the session
  $_SESSION = [];
- // invalidate the session cookie
+
+ // something the website told me to do with cookies
  if (isset($_COOKIE[session_name()])) {
  setcookie(session_name(), '', time()-86400, '/');
  }
- // end session and redirect with query string
+
+ // killing session and redirecting
  session_destroy();
  header("Location: {./logins.php}?expired=yes");
  exit;
-} else {
- // if it's got this far, it's OK, so update start time
+}
+ else
+  {
  $_SESSION['start'] = time();
 }

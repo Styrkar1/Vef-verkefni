@@ -29,7 +29,7 @@ class Upload {
         $this->renameDuplicates = $renameDuplicates;
         $uploaded = current($_FILES);
         if (is_array($uploaded['name'])) {
-            // deal with multiple uploads
+            // taking on lots of files
             foreach ($uploaded['name'] as $key => $value) {
                 $currentFile['name'] = $uploaded['name'][$key];
                 $currentFile['type'] = $uploaded['type'][$key];
@@ -64,7 +64,7 @@ class Upload {
     public function allowAllTypes($suffix = true) {
         $this->typeCheckingOn = false;
         if (!$suffix) {
-            $this->suffix = '';  // empty string
+            $this->suffix = '';  // epties the string
         }
     }
 
@@ -72,7 +72,7 @@ class Upload {
         $accept = true;
         if ($file['error'] != 0) {
             $this->getErrorMessage($file);
-            // stop checking if no file submitted
+            // stops checking for file
             if ($file['error'] == 4) {
                 return false;
             } else {
@@ -154,7 +154,7 @@ class Upload {
             $name = isset($this->newName) ? $this->newName : $file['name'];
             $existing = scandir($this->destination);
             if (in_array($name, $existing)) {
-                // rename file
+                // renaming the file
                 $basename = pathinfo($name, PATHINFO_FILENAME);
                 $extension = pathinfo($name, PATHINFO_EXTENSION);
                 $i = 1;

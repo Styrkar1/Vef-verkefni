@@ -5,18 +5,53 @@ session_start();
  		exit;
  }
 
- // run this script only if the logout button has been clicked
+ // if logout is clicked, runs this
 if (isset($_POST['logout'])) {
- // empty the $_SESSION array
+ // removes the varaible from the session
  $_SESSION = [];
- // end session and redirect
+ // DESTROYES the session and redirects to the logins page
  session_destroy();
  header('Location: ./logins.php');
  exit;
 }
-require './classes/fileupload.php';
+
 require_once './includes/timeout.php';
 include './includes/title.php';
+require './classes/fileupload.php';
+
+
+ if(isset($_POST['Update']))
+{
+	$userO = $_POST["userO"];
+	$passO = $_POST["passO"];
+	$passN = $_POST["passN"];
+	$userN = $_POST["userN"];
+
+$sql = "SELECT `userID` FROM `users` WHERE '$passO' = `userPassword` and '$userO' = `userName`";
+$result = mysqli_query($con,$sql);
+$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+ 
+if(mysqli_num_rows($result) == 1)
+{
+ echo "You must enter new credentials.";
+}
+
+else
+{
+$query = mysqli_query($con, "UPDATE `users` SET `userName`= '$userN',`userPassword`= '$passN'");
+}
+ 
+if($query)
+{
+ 	echo "Credentials updated.";
+}
+
+else
+{
+	echo "ripperoni";
+}
+
+}
  ?>
 <!DOCTYPE html>
 <html>
@@ -38,7 +73,9 @@ include './includes/title.php';
 							<form method="post" action="">
  								<input name="logout" type="submit" value="Log out">
 							</form>
-							<p></p>
+							<p>
+								
+							</p>
 
 <form action="" method="post" enctype="multipart/form-data">
   <p>
@@ -57,10 +94,33 @@ include './includes/title.php';
     <input type="submit" name="upload" id="upload" value="Upload">
   </p>
 </form>
+<p>Update Credentials</p>
+ <label for="userO">Username:</label>
+ <input type="text" name="userO">
+ </p>
+ <p>
+ <label for="passO">Password:</label>
+ <input type="password" name="passO">
+ </p>
+  <p>
+ <label for="NewPass">New Password:</label>
+ <input type="NewPass" name="NewPass">
+ </p>
+   <p>
+ <label for="NewUser">New Username:</label>
+ <input type="NewUser" name="NewUser">
+ </p>
+
+ <p>
+ <input name="Update" type="submit" value="Updating">
+ </p>
+
 <pre>
 <?php
 if (isset($_POST['upload'])) {
   print_r($_FILES);
+
+	$Upload = new upload();
 }
 ?>
 					</div>
