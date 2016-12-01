@@ -1,4 +1,5 @@
 <?php include './includes/title.php' ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -16,13 +17,9 @@
 			<main>
 				<div id="content">
 					<div class="innertube">
-						<h1>The mountains.</h1>
-<img src="img/mountain.jpg" alt="tan" style="width:340px;height:230px;"> 
-<p><small>img by *name*</small></p>
-						<h1>The landscape</h1>
-<img src="img/landscape.jpg" alt="tan" style="width:340px;height:230px;"> 
-<p><small>img by *name*</small></p>
-						<h1>Etc...</h1>
+
+						<?php require './includes/image.php' ?>
+
 					</div>
 				</div>
 			</main>
